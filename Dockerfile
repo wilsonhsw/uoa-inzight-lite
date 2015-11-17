@@ -1,4 +1,4 @@
-FROM scienceis/inzight-base:latest
+FROM scienceis/uoa-inzight-base:latest
 
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
