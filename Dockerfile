@@ -3,7 +3,9 @@ FROM scienceis/uoa-inzight-base:latest
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
 # install R packages specific to iNZight Lite
-RUN rm -rf /srv/shiny-server/* \
+RUN apt-get update \
+  && apt-get install -q -y git \
+  && rm -rf /srv/shiny-server/* \
   && git clone https://github.com/iNZightVIT/Lite.git \
   && rm -rf Lite/.git \
   && cp -R Lite/* /srv/shiny-server \
