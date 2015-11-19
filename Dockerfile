@@ -5,10 +5,10 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # install R packages specific to iNZight Lite
 RUN apt-get update \
   && rm -rf /srv/shiny-server/* \
-  && wget -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
+  && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
   && cp -R Lite-master/* /srv/shiny-server \
-  && rm -rf Lite-master/ \
+  && rm -rf Lite.zip Lite-master/ \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # copy shiny-server startup script
