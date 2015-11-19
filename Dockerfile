@@ -2,8 +2,12 @@ FROM scienceis/uoa-inzight-base:latest
 
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
-# install R packages specific to iNZight Lite
-RUN apt-get update \
+# Install (via R) all of the necessary packages (R will automatially install dependencies):
+RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
+  && R -e "install.packages(\
+             c('iNZightMR', 'iNZightTS', 'iNZightRegression', 'iNZightPlots'), \
+             repos = c('http://docker.stat.auckland.ac.nz/R', 'http://cran.stat.auckland.ac.nz') \
+           )" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
