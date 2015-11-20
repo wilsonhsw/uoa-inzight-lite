@@ -5,7 +5,7 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
   && R -e "install.packages(\
-             c('iNZightMR', 'iNZightTS', 'iNZightRegression', 'iNZightPlots'), \
+             c('iNZightMR', 'iNZightTS', 'iNZightRegression', 'iNZightPlots', 'GGally'), \
              repos = c('http://docker.stat.auckland.ac.nz/R', 'http://cran.stat.auckland.ac.nz') \
            )" \
   && rm -rf /srv/shiny-server/* \
