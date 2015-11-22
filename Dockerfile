@@ -1,13 +1,16 @@
-FROM scienceis/uoa-inzight-base:latest
+# ----------------------------------------
+#
+# This image inherits uoa-inzight-lite-base image, 
+# updates packages from docker.stat.auckland.ac.nz 
+# repository and installs the shiny app for Lite
+#
+# ----------------------------------------
+FROM scienceis/uoa-inzight-lite-base:latest
 
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
-  && R -e "install.packages(\
-             c('iNZightMR', 'iNZightTS', 'iNZightRegression', 'iNZightPlots', 'GGally'), \
-             repos = c('http://docker.stat.auckland.ac.nz/R', 'http://cran.stat.auckland.ac.nz') \
-           )" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
