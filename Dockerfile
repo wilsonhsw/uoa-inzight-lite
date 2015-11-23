@@ -10,7 +10,8 @@ FROM uoa-inzight-lite-base:tom
 
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
-# Install (via R) all of the necessary packages (R will automatially install dependencies):
+# Update the packages hosted on docker.stat;
+# download latest Lite app and put in place
 RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
