@@ -1,11 +1,12 @@
 # ----------------------------------------
 #
-# This image inherits uoa-inzight-lite-base image, 
-# updates packages from docker.stat.auckland.ac.nz 
+# This image inherits uoa-inzight-lite-base image,
+# updates packages from docker.stat.auckland.ac.nz
 # repository and installs the shiny app for Lite
 #
 # ----------------------------------------
-FROM scienceis/uoa-inzight-lite-base:latest
+#FROM scienceis/uoa-inzight-lite-base:latest
+FROM uoa-inzight-lite-base:tom
 
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
@@ -17,12 +18,3 @@ RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
   && cp -R Lite-master/* /srv/shiny-server \
   && rm -rf Lite.zip Lite-master/ \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# copy shiny-server startup script
-COPY shiny-server.sh /usr/bin/shiny-server.sh
-
-# make it executable
-RUN chmod +x /usr/bin/shiny-server.sh
-
-# startup process
-CMD ["/usr/bin/shiny-server.sh"]
