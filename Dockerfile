@@ -9,20 +9,19 @@ FROM scienceis/uoa-inzight-lite-base:latest
 
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
+# Edit the following environment variable, commit to Github and it will trigger Docker build
+# Since we fetch the latest changes from the associated Application~s master branch
+# this helps trigger date based build
+# The other option would be to tag git builds and refer to the latest tag
+ENV LAST_BUILD_DATE "2015-11-30"
+
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
   && cp -R Lite-master/* /srv/shiny-server \
+  && echo $LAST_BUILD_DATE > /srv/shiny-server/build.txt \
   && rm -rf Lite.zip Lite-master/ \
-  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && rm -rf /tmp/* /var/tmp/*
 
-# copy shiny-server startup script
-COPY shiny-server.sh /usr/bin/shiny-server.sh
-
-# make it executable
-RUN chmod +x /usr/bin/shiny-server.sh
-
-# startup process
-CMD ["/usr/bin/shiny-server.sh"]
