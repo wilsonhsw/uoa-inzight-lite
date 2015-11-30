@@ -25,3 +25,5 @@ RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
   && rm -rf Lite.zip Lite-master/ \
   && rm -rf /tmp/* /var/tmp/*
 
+# start shiny server process - it listens to port 3838
+CMD ["/opt/shiny-server.sh"]
