@@ -13,7 +13,7 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # Since we fetch the latest changes from the associated Application~s master branch
 # this helps trigger date based build
 # The other option would be to tag git builds and refer to the latest tag
-ENV LAST_BUILD_DATE "2016-02-11 12:01 PM NZDT"
+ENV LAST_BUILD_DATE "Fri Feb 12 10:48:00 NZDT 2016"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
