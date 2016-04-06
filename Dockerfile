@@ -17,7 +17,7 @@ ENV LAST_BUILD_DATE "Wed Apr 06 22:30:00 NZDT 2016"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
-  && R - e "remove.packages('iNZightPlots')" \
+  && R -e "remove.packages('iNZightPlots')" \
   && wget --no-verbose -O iNZightPlots.zip https://github.com/iNZightVIT/iNZightPlots/archive/v2-3-8-1.zip \
   && unzip iNZightPlots.zip \
   && R CMD INSTALL iNZightPlots-2-3-8-1 \
