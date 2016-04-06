@@ -13,15 +13,10 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # Since we fetch the latest changes from the associated Application~s master branch
 # this helps trigger date based build
 # The other option would be to tag git builds and refer to the latest tag
-ENV LAST_BUILD_DATE "Wed Apr 07 10:24:00 NZDT 2016"
+ENV LAST_BUILD_DATE "Wed Apr 07 10:35 NZDT 2016"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
-  && R -e "remove.packages('iNZightPlots')" \
-  && wget --no-verbose -O iNZightPlots.zip https://github.com/iNZightVIT/iNZightPlots/archive/v2-3-8-1.zip \
-  && unzip iNZightPlots.zip \
-  && R CMD INSTALL iNZightPlots-2-3-8-1 \
-  && rm -rf iNZightPlots* \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
