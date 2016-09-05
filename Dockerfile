@@ -13,10 +13,10 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # Since we fetch the latest changes from the associated Application~s master branch
 # this helps trigger date based build
 # The other option would be to tag git builds and refer to the latest tag
-ENV LAST_BUILD_DATE "Wed Sep 05 00:20:00 NZDT 2016"
+ENV LAST_BUILD_DATE "Wed Sep 05 00:25:00 NZDT 2016"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
-RUN R -e "install.packages("hextri", repos = 'http://cran.us.r-project.org', type="both")" \
+RUN R -e "install.packages("https://cran.r-project.org/bin/macosx/mavericks/contrib/3.3/hextri_0.6.tgz")" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
