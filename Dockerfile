@@ -13,10 +13,13 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # Since we fetch the latest changes from the associated Application~s master branch
 # this helps trigger date based build
 # The other option would be to tag git builds and refer to the latest tag
-ENV LAST_BUILD_DATE "2015-12-03 1:58 PM NZDT"
+ENV LAST_BUILD_DATE "Sun 02 04 23:55:00 NZDT 2017"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
-RUN R -e "update.packages(repos = 'http://docker.stat.auckland.ac.nz/R')" \
+RUN apt-get update \
+  && apt-get install -y -q \
+                     libxml2-dev \
+  && R -e "update.packages(oldPkgs = 'shiny', repos = 'https://cran.r-project.org', ask = FALSE); install.packages('hextri', repos = 'https://cran.r-project.org', type = 'source'); install.packages('gridSVG', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE);  install.packages('RgoogleMaps', repos = 'https://cran.r-project.org', dependencies = TRUE); install.packages('countrycode', repos = 'https://cran.r-project.org'); update.packages(repos = 'http://r.docker.stat.auckland.ac.nz/R/', ask = FALSE); install.packages('iNZightMaps', repos = 'http://r.docker.stat.auckland.ac.nz/R/')" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
