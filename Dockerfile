@@ -30,7 +30,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libcurl4-openssl-dev \
                        libcairo2-dev \
                        libv8-3.14-dev \
-  && R -e "update.packages(checkBuilt=TRUE, ask=FALSE); update.packages(oldPkgs = 'shiny', repos = 'https://cran.r-project.org', ask = FALSE)" \
+  && R -e "update.packages(oldPkgs = 'shiny', repos = 'https://cran.r-project.org', ask = FALSE)" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
