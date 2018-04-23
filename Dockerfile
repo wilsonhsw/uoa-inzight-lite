@@ -17,14 +17,13 @@ ENV LAST_BUILD_DATE "Sun 12 11 23:45:00 NZDT 2017"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
-    && echo "deb https://cran.stat.auckland.ac.nz/bin/linux/ubuntu stretch-cran34/" | sudo tee -a /etc/apt/R.list \
+    && echo "deb https://cran.stat.auckland.ac.nz/bin/linux/debian jessie-cran3/" | sudo tee -a /etc/apt/R.list \
     && apt-get update -y -q \
     && apt-get upgrade -y -q \
                        r-base \
     && apt-get update -y -q \
     && apt-get upgrade -y -q \
     && apt-get install -y -q \
-                       libssh2-1-dev \
                        libxml2-dev \
                        default-jdk \
                        libcurl4-openssl-dev \
