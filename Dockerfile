@@ -17,9 +17,6 @@ ENV LAST_BUILD_DATE "Sun 12 11 23:45:00 NZDT 2017"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
-    && wget --no-verbose -O libjq-dev.deb http://ftp.us.debian.org/debian/pool/main/j/jq/libjq-dev_1.5+dfsg-2_amd64.deb \
-    && dpkg -i libjq-dev.deb \
-    && rm -f libjq-dev.deb \
     && echo "deb https://cran.stat.auckland.ac.nz/bin/linux/debian stretch-cran34/" | sudo tee -a /etc/apt/R.list \
 
     && apt-get update -y -q \
@@ -40,10 +37,14 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libudunits2-dev \
                        libgeos-dev \
                        libpq-dev \
+                       libjq1 \
     && apt-get upgrade -y -q \
                        r-base \
     && apt-get update -y -q \
     && apt-get upgrade -y -q \
+    && wget --no-verbose -O libjq-dev.deb http://ftp.us.debian.org/debian/pool/main/j/jq/libjq-dev_1.5+dfsg-2_amd64.deb \
+    && dpkg -i libjq-dev.deb \
+    && rm -f libjq-dev.deb \
     
   && R -e "update.packages(oldPkgs = 'shiny', repos = 'https://cran.r-project.org', ask = FALSE); install.packages('hextri', repos = 'https://cran.r-project.org', type = 'source'); install.packages('colorspace', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('RColorBrewer', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('viridis', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('XML', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('https://cran.r-project.org/src/contrib/Archive/gridSVG/gridSVG_1.5-0.tar.gz', repos = NULL, type = 'source', dependencies = TRUE);  install.packages('RgoogleMaps', repos = 'https://cran.r-project.org', dependencies = TRUE); install.packages('countrycode', repos = 'https://cran.r-project.org'); update.packages(repos = 'http://r.docker.stat.auckland.ac.nz/R/', ask = FALSE); install.packages('iNZightMaps', repos = 'http://r.docker.stat.auckland.ac.nz/R/'); install.packages('xlsx', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('foreign', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('sas7bdat', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('shinyjs', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('devtools', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('sf', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('rgeos', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('tidyverse/ggplot2'); devtools::install_github('daniel-barnett/ggsfextra'); devtools::install_github('iNZightVIT/iNZightMaps@dev')" \
   && rm -rf /srv/shiny-server/* \
