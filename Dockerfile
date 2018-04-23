@@ -18,7 +18,7 @@ ENV LAST_BUILD_DATE "Sun 12 11 23:45:00 NZDT 2017"
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
     && echo "deb https://cran.stat.auckland.ac.nz/bin/linux/debian stretch-cran34/" | sudo tee -a /etc/apt/R.list \
-    && echo "deb http://deb.debian.org/debian stretch main/" | sudo tee -a /etc/apt/sources.list \
+    && echo "deb http://deb.debian.org/debian stretch main" | sudo tee -a /etc/apt/sources.list \
 
     && apt-get update -y -q \
 #    && apt-get install -y -q \
