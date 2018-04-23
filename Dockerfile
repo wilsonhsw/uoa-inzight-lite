@@ -19,10 +19,10 @@ ENV LAST_BUILD_DATE "Sun 12 11 23:45:00 NZDT 2017"
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
     && echo "deb https://cran.stat.auckland.ac.nz/bin/linux/debian stretch-cran34/" | sudo tee -a /etc/apt/R.list \
 
-RUN apt-get update -y -q \
+    && apt-get update -y -q \
     && apt-get install -y -q \
                        software-properties-common \
-    && add-apt-repository -y ppa:opencpu/jq
+    && add-apt-repository -y ppa:opencpu/jq \
     && apt-get install -y -q \
                        libxml2-dev \
                        default-jdk \
