@@ -23,6 +23,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
     && apt-get install -y -q \
                        software-properties-common \
     && add-apt-repository -y ppa:opencpu/jq \
+    && apt-get update -y -q \
+    && apt-get install libjq-dev \
     && apt-get install -y -q \
                        libxml2-dev \
                        default-jdk \
@@ -35,7 +37,6 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libudunits2-dev \
                        libgeos-dev \
                        libpq-dev \
-                       libjq-dev \
     && apt-get upgrade -y -q \
                        r-base \
     && apt-get update -y -q \
