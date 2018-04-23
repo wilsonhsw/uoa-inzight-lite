@@ -21,6 +21,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
     && apt-get update -y -q \
 
     && apt-get install -y -q \
+                       gcc-4.8 \
                        libxml2-dev \
                        default-jdk \
                        libcurl4-openssl-dev \
