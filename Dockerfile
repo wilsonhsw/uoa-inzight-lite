@@ -19,9 +19,7 @@ ENV LAST_BUILD_DATE "Sun 12 11 23:45:00 NZDT 2017"
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
     && echo "deb http://deb.debian.org/debian stretch main" | sudo tee -a /etc/apt/sources.list \
     && apt-get update -y -q \
-
     && apt-get install -y -q \
-                       gcc-4.9 \
                        libxml2-dev \
                        default-jdk \
                        libcurl4-openssl-dev \
@@ -35,17 +33,24 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libgeos-dev \
                        libpq-dev \
                        libjq-dev \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 \ 
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 50 \
-    && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 60 \
-    && update-alternatives --set cc /usr/bin/gcc \
-    && update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 60 \
-    && update-alternatives --set c++ /usr/bin/g++ \
-    && update-alternatives --config gcc \
-    && update-alternatives --config g++ \
+    && apt-get install -y -q \ 
+                       software-properties-common \
+    && add-apt-repository ppa:ubuntu-toolchain-r/test \
+    && apt-get update \
+    && apt-get install gcc-5 g++-5 \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5 \
 
-    && apt-get update -y -q \
-    && apt-get upgrade -y -q \
+#    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 \ 
+#    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 50 \
+#    && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 60 \
+#    && update-alternatives --set cc /usr/bin/gcc \
+#    && update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 60 \
+#    && update-alternatives --set c++ /usr/bin/g++ \
+#    && update-alternatives --config gcc \
+#    && update-alternatives --config g++ \
+
+#    && apt-get update -y -q \
+#    && apt-get upgrade -y -q \
     
   && R -e "install.packages('devtools', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('r-spatial/sf'); devtools::install_github('daniel-barnett/ggsfextra'); devtools::install_github('iNZightVIT/iNZightMaps@dev')" \
   && rm -rf /srv/shiny-server/* \
