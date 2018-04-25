@@ -35,16 +35,14 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libgeos-dev \
                        libpq-dev \
                        libjq-dev \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 50
-    && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 60
-    && update-alternatives --set cc /usr/bin/gcc
-
-    && update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 60
-    && update-alternatives --set c++ /usr/bin/g++
-    
-    && update-alternatives --config gcc
-    && update-alternatives --config g++
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 \ 
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 50 \
+    && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 60 \
+    && update-alternatives --set cc /usr/bin/gcc \
+    && update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 60 \
+    && update-alternatives --set c++ /usr/bin/g++ \
+    && update-alternatives --config gcc \
+    && update-alternatives --config g++ \
 
     && apt-get update -y -q \
     && apt-get upgrade -y -q \
