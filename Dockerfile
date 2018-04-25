@@ -18,7 +18,7 @@ ENV LAST_BUILD_DATE "Sun 12 11 23:45:00 NZDT 2017"
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
 #    && echo "deb http://deb.debian.org/debian stretch main" | sudo tee -a /etc/apt/sources.list \
-    && echo "deb http://deb.debian.org/debian jessie oldstable" | sudo tee -a /etc/apt/sources.list \
+    && echo "deb http://us.archive.ubuntu.com/ubuntu/ xenial main restricted" | sudo tee -a /etc/apt/sources.list \
     && apt-get update -y -q \
     && apt-get install -y -q \
                        libxml2-dev \
