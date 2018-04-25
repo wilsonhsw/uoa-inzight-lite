@@ -17,7 +17,8 @@ ENV LAST_BUILD_DATE "Sun 12 11 23:45:00 NZDT 2017"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
-    && echo "deb http://deb.debian.org/debian stretch main" | sudo tee -a /etc/apt/sources.list \
+#    && echo "deb http://deb.debian.org/debian stretch main" | sudo tee -a /etc/apt/sources.list \
+    && echo "deb http://deb.debian.org/debian jessie oldstable" | sudo tee -a /etc/apt/sources.list \
     && apt-get update -y -q \
     && apt-get install -y -q \
                        libxml2-dev \
@@ -33,13 +34,14 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libgeos-dev \
                        libpq-dev \
                        libjq-dev \
-    && apt-get install -y -q \ 
-                       software-properties-common \
-    && add-apt-repository ppa:jonathonf/gcc-7.1 \
+                       gcc-4.8 g++-4.8 \
+#    && apt-get install -y -q \ 
+#                       software-properties-common \
+#    && add-apt-repository ppa:jonathonf/gcc-7.1 \
 
-    && apt-get update -y -q \
-    && apt-get install gcc-7 g++-7 \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7 \
+#    && apt-get update -y -q \
+#    && apt-get install gcc-7 g++-7 \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8 \
 
 #    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 \ 
 #    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 50 \
