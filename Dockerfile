@@ -35,13 +35,21 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libgeos-dev \
                        libpq-dev \
                        libjq-dev \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9 \
-    && gcc -v \
-    && g++ -v \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 50
+    && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 60
+    && update-alternatives --set cc /usr/bin/gcc
+
+    && update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 60
+    && update-alternatives --set c++ /usr/bin/g++
+    
+    && update-alternatives --config gcc
+    && update-alternatives --config g++
+
     && apt-get update -y -q \
     && apt-get upgrade -y -q \
     
-  && R -e "install.packages('xlsx', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('devtools', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('r-spatial/sf'); install.packages('rgeos', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('tidyverse/ggplot2'); devtools::install_github('daniel-barnett/ggsfextra'); devtools::install_github('iNZightVIT/iNZightMaps@dev')" \
+  && R -e "install.packages('devtools', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('r-spatial/sf'); devtools::install_github('daniel-barnett/ggsfextra'); devtools::install_github('iNZightVIT/iNZightMaps@dev')" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
