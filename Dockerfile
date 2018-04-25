@@ -35,10 +35,11 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libjq-dev \
     && apt-get install -y -q \ 
                        software-properties-common \
-    && add-apt-repository ppa:ubuntu-toolchain-r/test \
-    && apt-get update \
-    && apt-get install gcc-5 g++-5 \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5 \
+    && add-apt-repository ppa:jonathonf/gcc-7.1 \
+
+    && apt-get update -y -q \
+    && apt-get install gcc-7 g++-7 \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7 \
 
 #    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 \ 
 #    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 50 \
