@@ -33,7 +33,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libudunits2-dev \
                        libgeos-dev \
                        libpq-dev \
-                       libjq-dev \
+#                       libjq-dev \
                        gcc-4.8 g++-4.8 \
 #    && apt-get install -y -q \ 
 #                       software-properties-common \
