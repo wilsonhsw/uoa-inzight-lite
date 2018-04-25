@@ -17,9 +17,9 @@ ENV LAST_BUILD_DATE "Sun 12 11 23:45:00 NZDT 2017"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
-#    && echo "deb http://deb.debian.org/debian stretch main" | sudo tee -a /etc/apt/sources.list \
-    && echo "deb http://us.archive.ubuntu.com/ubuntu/ xenial main restricted" | sudo tee -a /etc/apt/sources.list \
+    && echo "deb http://deb.debian.org/debian stretch main" | sudo tee -a /etc/apt/sources.list \
     && apt-get update -y -q \
+
     && apt-get install -y -q \
                        libxml2-dev \
                        default-jdk \
@@ -33,29 +33,22 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                        libudunits2-dev \
                        libgeos-dev \
                        libpq-dev \
-#                       libjq-dev \
-                       gcc-4.8 g++-4.8 \
-#    && apt-get install -y -q \ 
-#                       software-properties-common \
-#    && add-apt-repository ppa:jonathonf/gcc-7.1 \
-
-#    && apt-get update -y -q \
-#    && apt-get install gcc-7 g++-7 \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8 \
-
-#    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 \ 
-#    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 50 \
-#    && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 60 \
-#    && update-alternatives --set cc /usr/bin/gcc \
-#    && update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 60 \
-#    && update-alternatives --set c++ /usr/bin/g++ \
-#    && update-alternatives --config gcc \
-#    && update-alternatives --config g++ \
-
-#    && apt-get update -y -q \
-#    && apt-get upgrade -y -q \
+                       libjq-dev \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9 \
+    && R -e "update.packages(oldPkgs = 'shiny', repos = 'https://cran.r-project.org', ask = FALSE); install.packages('hextri', repos = 'https://cran.r-project.org', type = 'source'); install.packages('colorspace', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('RColorBrewer', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('viridis', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('XML', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('https://cran.r-project.org/src/contrib/Archive/gridSVG/gridSVG_1.5-0.tar.gz', repos = NULL, type = 'source', dependencies = TRUE);  install.packages('RgoogleMaps', repos = 'https://cran.r-project.org', dependencies = TRUE); install.packages('countrycode', repos = 'https://cran.r-project.org'); update.packages(repos = 'http://r.docker.stat.auckland.ac.nz/R/', ask = FALSE); install.packages('iNZightMaps', repos = 'http://r.docker.stat.auckland.ac.nz/R/'); install.packages('foreign', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('sas7bdat', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('shinyjs', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE)" \  
+    && echo "deb https://cran.stat.auckland.ac.nz/bin/linux/debian stretch-cran34/" | sudo tee -a /etc/apt/R.list \
+    && apt-get update -y -q \
+    && apt-get upgrade -y -q \
+                       r-base \
+    && apt-get update -y -q \
+    && apt-get upgrade -y -q \
     
-  && R -e "install.packages('devtools', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('r-spatial/sf'); devtools::install_github('daniel-barnett/ggsfextra'); devtools::install_github('iNZightVIT/iNZightMaps@dev')" \
+    && apt-get install -y -q \
+                       gcc-6 \
+                       g++-6 \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 \ 
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 60 \ 
+  && R -e "install.packages('xlsx', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('devtools', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('sf', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('rgeos', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('tidyverse/ggplot2'); devtools::install_github('daniel-barnett/ggsfextra'); devtools::install_github('iNZightVIT/iNZightMaps@dev')" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
