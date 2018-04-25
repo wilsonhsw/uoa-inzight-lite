@@ -47,7 +47,10 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
                       gcc-6 \
                       g++-6 \
   && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6 \
-  && R -e "install.packages('xlsx', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('devtools', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('sf', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('rgeos', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('tidyverse/ggplot2'); devtools::install_github('daniel-barnett/ggsfextra'); devtools::install_github('iNZightVIT/iNZightMaps@dev')" \
+  && apt-get update -y -q \
+  && apt-get upgrade -y -q \
+  
+  && R -e "install.packages('sf', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('xlsx', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('devtools', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); install.packages('rgeos', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('tidyverse/ggplot2'); devtools::install_github('daniel-barnett/ggsfextra'); devtools::install_github('iNZightVIT/iNZightMaps@dev')" \
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
