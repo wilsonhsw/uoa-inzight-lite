@@ -53,6 +53,9 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
   
   && R -e "install.packages('sf', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE); devtools::install_github('daniel-barnett/ggsfextra'); devtools::install_github('iNZightVIT/iNZightMaps@dev')" \
   
+  && R -e "install.packages('forcats', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE)" \
+  && R -e "install.packages('iNZightTS', repos = 'http://r.docker.stat.auckland.ac.nz/R/')" \
+  
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
   && unzip Lite.zip \
