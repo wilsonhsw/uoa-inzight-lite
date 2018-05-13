@@ -13,7 +13,7 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # Since we fetch the latest changes from the associated Application~s master branch
 # this helps trigger date based build
 # The other option would be to tag git builds and refer to the latest tag
-ENV LAST_BUILD_DATE "Sun 06 05 21:45:00 NZDT 2018"
+ENV LAST_BUILD_DATE "Sun 13 05 21:45:00 NZDT 2018"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
