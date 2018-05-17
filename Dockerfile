@@ -13,7 +13,7 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # Since we fetch the latest changes from the associated Application~s master branch
 # this helps trigger date based build
 # The other option would be to tag git builds and refer to the latest tag
-ENV LAST_BUILD_DATE "Sun 08 05 21:45:00 NZDT 2018"
+ENV LAST_BUILD_DATE "Sun 13 05 21:45:00 NZDT 2018"
 
 # Install (via R) all of the necessary packages (R will automatially install dependencies):
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
@@ -55,6 +55,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
   
   && R -e "install.packages('forcats', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE)" \
   && R -e "install.packages('iNZightTS', repos = 'http://r.docker.stat.auckland.ac.nz/R/')" \
+  && R -e "remove.packages('ggrepel')" \
+  && R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/ggrepel/ggrepel_0.7.0.tar.gz', repos = NULL, type = 'source', dependencies = TRUE)" \
   
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
