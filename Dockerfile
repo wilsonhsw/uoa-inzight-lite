@@ -57,6 +57,10 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
   && R -e "install.packages('iNZightTS', repos = 'http://r.docker.stat.auckland.ac.nz/R/')" \
   && R -e "remove.packages('ggrepel')" \
   && R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/ggrepel/ggrepel_0.7.0.tar.gz', repos = NULL, type = 'source', dependencies = TRUE)" \
+  && R -e "remove.packages('dplyr')" \
+  && R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/dplyr/dplyr_0.7.4.tar.gz', repos = NULL, type = 'source', dependencies = TRUE)" \
+  && R -e "install.packages('GGally', repos = 'https://cran.r-project.org', type = 'source', dependencies = TRUE)" \
+  
   
   && rm -rf /srv/shiny-server/* \
   && wget --no-verbose -O Lite.zip https://github.com/iNZightVIT/Lite/archive/master.zip \
